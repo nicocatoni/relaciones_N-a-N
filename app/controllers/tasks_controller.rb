@@ -13,8 +13,12 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     @task = Task.find(params[:id])
-    @ranking = @task.users.limit(5).sort_by(&:created_at)
-    @users = @task.users
+    @ready_users = []
+    Album.all.each do |album|
+      if Album.completed? && album.task == @task
+        @ready_users.push(album.user)
+      end
+    end
   end
 
   # GET /tasks/new

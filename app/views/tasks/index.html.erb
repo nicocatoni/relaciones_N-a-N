@@ -8,7 +8,7 @@
       <%= link_to 'Detalles', task, class: 'btn btn-light' %>
       <% if user_signed_in? %>
         <% if current_user.tasks.where(id: task.id).present? %>
-          <%= link_to 'Hecha', album_task_path(task.id, id: current_user), method: :delete, class: 'btn btn-success' %>
+         
         <% else %>
           <%= link_to 'Aún por hacer', album_index_path(task.id), method: :post, class: 'btn btn-warning' %>
         <% end %>

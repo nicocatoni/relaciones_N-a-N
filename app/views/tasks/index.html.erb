@@ -1,0 +1,20 @@
+<div class="row">
+<% @tasks.each do |task| %>
+  <div class="col-md-4">
+  <div class="card" style="text-align: center; margin-top: 20px">
+    <img class="card-img-top" src="<%= task.photo %>" >
+    <div class="card-body">
+      <h5 class="card-title"><%= task.name %></h5>
+      <%= link_to 'Detalles', task, class: 'btn btn-light' %>
+      <% if user_signed_in? %>
+        <% if current_user.tasks.where(id: task.id).present? %>
+          <%= link_to 'Hecha', album_task_path(task.id, id: current_user), method: :delete, class: 'btn btn-success' %>
+        <% else %>
+          <%= link_to 'Aún por hacer', album_index_path(task.id), method: :post, class: 'btn btn-warning' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  </div>
+<% end %>
+</div>
